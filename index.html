@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mapa de Carreira — Larah Gabriella</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" />
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --black: #0d0d0d;
+      --near-black: #111111;
+      --dark: #1a1a2e;
+      --purple-deep: #2d0a5e;
+      --purple: #6c3fc5;
+      --purple-mid: #8b5cf6;
+      --purple-light: #c4b5fd;
+      --purple-pale: #f3e8ff;
+      --white: #fafafa;
+      --off-white: #f5f4f0;
+      --gray-100: #e8e8e8;
+      --gray-400: #9a9a9a;
+      --gray-600: #555555;
+      --font-display: 'Playfair Display', serif;
+      --font-body: 'DM Sans', sans-serif;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--off-white);
+      color: var(--black);
+      font-family: var(--font-body);
+      font-size: 15px;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    /* ── LAYOUT ───────────────────────────── */
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 3rem 2rem 5rem;
+    }
+
+    /* ── HERO ─────────────────────────────── */
+    .hero {
+      background: var(--near-black);
+      border-radius: 24px;
+      padding: 3.5rem 3rem;
+      margin-bottom: 2rem;
+      position: relative;
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -80px;
+      right: -80px;
+      width: 320px;
+      height: 320px;
+      border-radius: 50%;
+      background: var(--purple-deep);
+      opacity: 0.6;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -60px;
+      left: 40%;
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      background: var(--purple);
+      opacity: 0.15;
+    }
+
+    .hero-text {
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-label {
+      font-family: var(--font-body);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--purple-light);
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .hero-label::before {
+      content: '';
+      display: inline-block;
+      width: 24px;
+      height: 1px;
+      background: var(--purple-light);
+    }
+
+    .hero h1 {
+      font-family: var(--font-display);
+      font-size: clamp(28px, 4vw, 42px);
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.15;
+      margin-bottom: 0.6rem;
+    }
+
+    .hero-role {
+      font-size: 15px;
+      color: var(--purple-light);
+      font-weight: 300;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 12px;
+      font-weight: 500;
+      padding: 5px 12px;
+      border-radius: 20px;
+    }
+
+    .badge-outline {
+      border: 1px solid rgba(196,181,253,0.35);
+      color: var(--purple-light);
+    }
+
+    .badge-filled {
+      background: var(--purple);
+      color: #fff;
+    }
+
+    .hero-avatar {
+      position: relative;
+      z-index: 1;
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--purple-deep), var(--purple));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-display);
+      font-size: 28px;
+      font-weight: 700;
+      color: #fff;
+      border: 2px solid rgba(196,181,253,0.3);
+      flex-shrink: 0;
+    }
+    .hero-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+    }
+
+    /* ── GRID MAIN ─────────────────────────── */
+    .main-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+    }
+
+    .col-left {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .col-right {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    /* ── CARD ─────────────────────────────── */
+    .card {
+      background: var(--white);
+      border-radius: 20px;
+      padding: 1.75rem;
+      border: 1px solid var(--gray-100);
+      animation: fadeUp 0.5s ease both;
+    }
+
+    .card:nth-child(1) { animation-delay: 0.05s; }
+    .card:nth-child(2) { animation-delay: 0.1s; }
+    .card:nth-child(3) { animation-delay: 0.15s; }
+    .card:nth-child(4) { animation-delay: 0.2s; }
+
+    .card-dark {
+      background: var(--near-black);
+      border-color: rgba(255,255,255,0.06);
+    }
+
+    .card-accent {
+      background: var(--purple-deep);
+      border-color: transparent;
+    }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 1.25rem;
+    }
+
+    .card-icon {
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--purple-pale);
+      flex-shrink: 0;
+    }
+
+    .card-icon i {
+      font-size: 17px;
+      color: var(--purple);
+    }
+
+    .card-dark .card-icon,
+    .card-accent .card-icon {
+      background: rgba(108,63,197,0.35);
+    }
+
+    .card-dark .card-icon i,
+    .card-accent .card-icon i {
+      color: var(--purple-light);
+    }
+
+    .card-title {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gray-400);
+    }
+
+    .card-dark .card-title,
+    .card-accent .card-title {
+      color: rgba(196,181,253,0.6);
+    }
+
+    /* ── OBJETIVOS ────────────────────────── */
+    .obj-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .obj-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--gray-100);
+    }
+
+    .obj-item:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .obj-marker {
+      margin-top: 5px;
+      flex-shrink: 0;
+    }
+
+    .obj-marker-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--purple);
+    }
+
+    .obj-body {}
+
+    .obj-text {
+      font-size: 14px;
+      color: var(--black);
+      line-height: 1.5;
+      margin-bottom: 3px;
+    }
+
+    .obj-meta {
+      font-size: 11px;
+      color: var(--purple);
+      font-weight: 500;
+    }
+
+    /* ── TRILHA ───────────────────────────── */
+    .trail {
+      position: relative;
+    }
+
+    .trail-item {
+      display: flex;
+      gap: 14px;
+      position: relative;
+      padding-bottom: 20px;
+    }
+
+    .trail-item:last-child {
+      padding-bottom: 0;
+    }
+
+    .trail-left {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      flex-shrink: 0;
+    }
+
+    .trail-num {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--near-black);
+      border: 2px solid var(--purple);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--purple-light);
+      flex-shrink: 0;
+    }
+
+    .trail-line {
+      width: 1px;
+      flex: 1;
+      background: linear-gradient(to bottom, var(--purple), transparent);
+      margin-top: 6px;
+      opacity: 0.4;
+    }
+
+    .trail-item:last-child .trail-line {
+      display: none;
+    }
+
+    .trail-content {
+      padding-top: 3px;
+    }
+
+    .trail-title {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--white);
+      margin-bottom: 2px;
+    }
+
+    .trail-sub {
+      font-size: 12px;
+      color: rgba(196,181,253,0.65);
+      line-height: 1.5;
+    }
+
+    /* ── HABILIDADES ──────────────────────── */
+    .skills-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .skill-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-weight: 400;
+      color: var(--purple);
+      background: var(--purple-pale);
+      border: 1px solid rgba(139,92,246,0.2);
+      padding: 5px 11px;
+      border-radius: 20px;
+      transition: all 0.2s ease;
+    }
+
+    .skill-chip:hover {
+      background: var(--purple);
+      color: #fff;
+      border-color: var(--purple);
+      transform: translateY(-1px);
+    }
+
+    .skill-chip i {
+      font-size: 13px;
+    }
+
+    /* ── IDIOMAS ──────────────────────────── */
+    .lang-list {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .lang-item {}
+
+    .lang-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 5px;
+    }
+
+    .lang-name {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--black);
+    }
+
+    .lang-level {
+      font-size: 11px;
+      color: var(--purple);
+      font-weight: 500;
+    }
+
+    .lang-bar {
+      height: 3px;
+      background: var(--gray-100);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    .lang-fill {
+      height: 100%;
+      border-radius: 2px;
+      background: linear-gradient(90deg, var(--purple-deep), var(--purple-mid));
+      transition: width 1.2s ease;
+    }
+
+    /* ── CONTATO ──────────────────────────── */
+    .contact-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      text-decoration: none;
+    }
+
+    .contact-item:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .contact-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 9px;
+      background: rgba(108,63,197,0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .contact-icon i {
+      font-size: 15px;
+      color: var(--purple-light);
+    }
+
+    .contact-info {}
+
+    .contact-label {
+      font-size: 11px;
+      color: rgba(196,181,253,0.5);
+    }
+
+    .contact-val {
+      font-size: 13px;
+      color: var(--white);
+      font-weight: 400;
+    }
+
+    /* ── FOOTER ───────────────────────────── */
+    .footer {
+      text-align: center;
+      margin-top: 3rem;
+      font-size: 12px;
+      color: var(--gray-400);
+      letter-spacing: 0.04em;
+    }
+
+    .footer span {
+      color: var(--purple);
+    }
+
+    /* ── ANIMATIONS ───────────────────────── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero {
+      animation: fadeUp 0.5s ease both;
+    }
+
+    /* ── RESPONSIVE ───────────────────────── */
+    @media (max-width: 640px) {
+      .container { padding: 1.5rem 1rem 4rem; }
+      .hero { grid-template-columns: 1fr; padding: 2rem 1.5rem; }
+      .hero-avatar { display: none; }
+      .main-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-text">
+      <div class="hero-label">Mapa de Carreira</div>
+      <h1>Larah Gabriella<br>Ferreira de Morais</h1>
+      <p class="hero-role">Desenvolvedora Front-end &amp; UI/UX Designer</p>
+      <div class="hero-badges">
+        <span class="badge badge-filled">
+          <i class="ti ti-seedling"></i> Nível Júnior
+        </span>
+        <span class="badge badge-outline">
+          <i class="ti ti-code"></i> Dev + Design
+        </span>
+        <span class="badge badge-outline">
+          <i class="ti ti-map-pin"></i> Brasil
+        </span>
+      </div>
+    </div>
+    <div class="hero-avatar">
+  <img src="larah3.jpg" alt="Larah Gabriella" />
+</div>
+  </div>
+
+  <!-- GRID PRINCIPAL -->
+  <div class="main-grid">
+
+    <!-- COLUNA ESQUERDA -->
+    <div class="col-left">
+
+      <!-- OBJETIVOS -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon"><i class="ti ti-target"></i></div>
+          <span class="card-title">Objetivos Profissionais</span>
+        </div>
+        <div class="obj-list">
+          <div class="obj-item">
+            <div class="obj-marker"><div class="obj-marker-dot"></div></div>
+            <div class="obj-body">
+              <div class="obj-text">Conquistar o primeiro emprego como desenvolvedora front-end ou designer UI/UX</div>
+              <div class="obj-meta">Curto prazo · 2026</div>
+            </div>
+          </div>
+          <div class="obj-item">
+            <div class="obj-marker"><div class="obj-marker-dot"></div></div>
+            <div class="obj-body">
+              <div class="obj-text">Dominar a interseção entre código e design, atuando como profissional híbrido Dev + UX</div>
+              <div class="obj-meta">Médio prazo · 2026</div>
+            </div>
+          </div>
+          <div class="obj-item">
+            <div class="obj-marker"><div class="obj-marker-dot"></div></div>
+            <div class="obj-body">
+              <div class="obj-text">Construir portfólio sólido com projetos reais que demonstrem sensibilidade visual e qualidade técnica</div>
+              <div class="obj-meta">Contínuo</div>
+        <div class="obj-item">
+  <div class="obj-marker"><div class="obj-marker-dot"></div></div>
+  <div class="obj-body">
+    <div class="obj-text">Atuar como Analista de Dados, desenvolvendo habilidades em análise, visualização e interpretação de dados para apoiar decisões estratégicas</div>
+    <div class="obj-meta">Contínuo</div>
+  </div>
+</div>      
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- HABILIDADES -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon"><i class="ti ti-brain"></i></div>
+          <span class="card-title">Habilidades</span>
+        </div>
+        <div class="skills-wrap">
+          <span class="skill-chip"><i class="ti ti-vector-bezier"></i> Figma</span>
+          <span class="skill-chip"><i class="ti ti-brand-html5"></i> HTML5</span>
+          <span class="skill-chip"><i class="ti ti-brand-css3"></i> CSS3</span>
+          <span class="skill-chip"><i class="ti ti-brand-javascript"></i> JavaScript</span>
+          <span class="skill-chip"><i class="ti ti-layout-2"></i> UI Design</span>
+          <span class="skill-chip"><i class="ti ti-users"></i> UX Research</span>
+          <span class="skill-chip"><i class="ti ti-brand-git"></i> Git</span>
+          <span class="skill-chip"><i class="ti ti-eye"></i> Acessibilidade</span>
+          <span class="skill-chip"><i class="ti ti-device-mobile"></i> Responsivo</span>
+          <span class="skill-chip"><i class="ti ti-palette"></i> Design System</span>
+        </div>
+      </div>
+
+<!-- SOFT SKILLS -->
+<div class="card">
+  <div class="card-header">
+    <div class="card-icon"><i class="ti ti-sparkles"></i></div>
+    <span class="card-title">Soft Skills</span>
+  </div>
+  <div class="skills-wrap">
+    <span class="skill-chip"><i class="ti ti-messages"></i> Comunicação</span>
+    <span class="skill-chip"><i class="ti ti-bulb"></i> Criatividade</span>
+    <span class="skill-chip"><i class="ti ti-puzzle"></i> Resolução de Problemas</span>
+    <span class="skill-chip"><i class="ti ti-clock"></i> Organização</span>
+    <span class="skill-chip"><i class="ti ti-users"></i> Trabalho em Equipe</span>
+    <span class="skill-chip"><i class="ti ti-refresh"></i> Adaptabilidade</span>
+    <span class="skill-chip"><i class="ti ti-book"></i> Aprendizado Contínuo</span>
+    <span class="skill-chip"><i class="ti ti-focus"></i> Atenção aos Detalhes</span>
+  </div>
+</div>
+
+      <!-- IDIOMAS -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon"><i class="ti ti-language"></i></div>
+          <span class="card-title">Idiomas</span>
+        </div>
+        <div class="lang-list">
+          <div class="lang-item">
+            <div class="lang-top">
+              <span class="lang-name">Português</span>
+              <span class="lang-level">Nativo · 100%</span>
+            </div>
+            <div class="lang-bar"><div class="lang-fill" style="width:100%"></div></div>
+          </div>
+          <div class="lang-item">
+            <div class="lang-top">
+              <span class="lang-name">Inglês</span>
+              <span class="lang-level">Em desenvolvimento · 35%</span>
+            </div>
+            <div class="lang-bar"><div class="lang-fill" style="width:35%"></div></div>
+          </div>
+          <div class="lang-item">
+            <div class="lang-top">
+              <span class="lang-name">Italiano</span>
+              <span class="lang-level">Em desenvolvimento · 35%</span>
+            </div>
+            <div class="lang-bar"><div class="lang-fill" style="width:35%"></div></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- COLUNA DIREITA -->
+    <div class="col-right">
+
+      <!-- TRILHA -->
+      <div class="card card-dark">
+        <div class="card-header">
+          <div class="card-icon"><i class="ti ti-route"></i></div>
+          <span class="card-title">Trilha de Aprendizagem</span>
+        </div>
+        <div class="trail">
+          <div class="trail-item">
+            <div class="trail-left">
+              <div class="trail-num">1</div>
+              <div class="trail-line"></div>
+            </div>
+            <div class="trail-content">
+              <div class="trail-title">Fundamentos de UI/UX</div>
+              <div class="trail-sub">Figma, Design Systems, prototipagem e pesquisa com usuários</div>
+            </div>
+          </div>
+          <div class="trail-item">
+            <div class="trail-left">
+              <div class="trail-num">2</div>
+              <div class="trail-line"></div>
+            </div>
+            <div class="trail-content">
+              <div class="trail-title">Front-end Core</div>
+              <div class="trail-sub">HTML5 semântico, CSS avançado, JavaScript</div>
+            </div>
+          </div>
+          <div class="trail-item">
+            <div class="trail-left">
+              <div class="trail-num">3</div>
+              <div class="trail-line"></div>
+            </div>
+            <div class="trail-content">
+              <div class="trail-title">Framework Moderno</div>
+              <div class="trail-sub">React.js, componentes reutilizáveis, gerenciamento de estado e hooks</div>
+            </div>
+          </div>
+          <div class="trail-item">
+            <div class="trail-left">
+              <div class="trail-num">4</div>
+              <div class="trail-line"></div>
+            </div>
+            <div class="trail-content">
+              <div class="trail-title">Portfólio &amp; Mercado</div>
+              <div class="trail-sub">GitHub, LinkedIn, projetos reais, candidaturas e networking ativo</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CONTATO -->
+      <div class="card card-accent">
+        <div class="card-header">
+          <div class="card-icon"><i class="ti ti-address-book"></i></div>
+          <span class="card-title">Contato</span>
+        </div>
+        <div class="contact-list">
+          <a class="contact-item" href="mailto:larahfm03@gmail.com">
+            <div class="contact-icon"><i class="ti ti-mail"></i></div>
+            <div class="contact-info">
+              <div class="contact-label">E-mail</div>
+              <div class="contact-val">larahfm03@gmail.com</div>
+            </div>
+          </a>
+          <a class="contact-item" href="https://www.linkedin.com/in/larahgabriella/" target="_blank">
+            <div class="contact-icon"><i class="ti ti-brand-linkedin"></i></div>
+            <div class="contact-info">
+              <div class="contact-label">LinkedIn</div>
+              <div class="contact-val">https://www.linkedin.com/in/larahgabriella/</div>
+            </div>
+          </a>
+          <a class="contact-item" href="https://github.com/larahgabriella03" target="_blank">
+            <div class="contact-icon"><i class="ti ti-brand-github"></i></div>
+            <div class="contact-info">
+              <div class="contact-label">GitHub</div>
+              <div class="contact-val">https://github.com/larahgabriella03</div>
+            </div>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="footer">
+    Feito com <span>♥</span> · Larah Gabriella · 2026
+  </div>
+
+</div>
+
+</body>
+</html>
